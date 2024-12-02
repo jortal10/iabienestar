@@ -31,9 +31,9 @@ load_dotenv()
 #UI_FAVICON = os.getenv("UI_FAVICON", "/static/images/default_favicon.ico")
 #UI_LOGO = os.getenv("UI_LOGO", "/static/images/default_logo.png")
 # Depuración
-print("UI_CHAT_LOGO:", UI_CHAT_LOGO)
-print("UI_FAVICON:", UI_FAVICON)
-print("UI_LOGO:", UI_LOGO)
+#print("UI_CHAT_LOGO:", UI_CHAT_LOGO)
+#print("UI_FAVICON:", UI_FAVICON)
+#print("UI_LOGO:", UI_LOGO)
 
 DOTENV_PATH = os.environ.get(
     "DOTENV_PATH",
