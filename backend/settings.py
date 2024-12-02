@@ -2,6 +2,7 @@ import os
 import json
 import logging
 from abc import ABC, abstractmethod
+from dotenv import load_dotenv
 from pydantic import (
     BaseModel,
     confloat,
