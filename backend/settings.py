@@ -55,11 +55,11 @@ class _UiSettings(BaseSettings):
         env_ignore_empty=True
     )
 
-    title: str = "Contoso"
+    title: str = "IA del Bienestar"
     logo: Optional[str] = None
     chat_logo: Optional[str] = None
-    chat_title: str = "Start chatting"
-    chat_description: str = "IA del bienestar"
+    chat_title: str = "Comienza a chatear"
+    chat_description: str = "Esta IA está preparada para resolver tus dudas sobre conceptos relacionados con el Bienestar"
     favicon: str = "/favicon.ico"
     show_share_button: bool = True
     show_chat_history_button: bool = True
