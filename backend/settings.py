@@ -2,7 +2,6 @@ import os
 import json
 import logging
 from abc import ABC, abstractmethod
-from dotenv import load_dotenv
 from pydantic import (
     BaseModel,
     confloat,
@@ -22,6 +21,20 @@ from typing_extensions import Self
 from quart import Request
 from backend.utils import parse_multi_columns, generateFilterString
 
+from dotenv import load_dotenv
+# UI variables
+load_dotenv()
+UI_CHAT_LOGO = os.getenv("UI_CHAT_LOGO","https://iastorageobs.blob.core.windows.net/logo/data4wellbeing_Logofull_H.png?sp=r&st=2024-10-14T10:59:41Z&se=2025-11-01T19:59:41Z&spr=https&sv=2022-11-02&sr=b&sig=2uzj7xNRcVr1QxlOFpr46GxJYl7gmmHNrZjNroIGiho%3D")
+UI_FAVICON = os.getenv("UI_FAVICON", "https://iastorageobs.blob.core.windows.net/logo/data4Wellbeing_logo.png?sp=r&st=2024-10-15T09:08:27Z&se=2025-10-15T17:08:27Z&sv=2022-11-02&sr=b&sig=XCMlXZnWbDT8Y4yOGUc4bXhv6555pxzVxUwK6tomdeY%3D")
+UI_LOGO = os.getenv("UI_LOGO", "https://iastorageobs.blob.core.windows.net/logo/data4Wellbeing_logo.png?sp=r&st=2024-10-15T09:08:27Z&se=2025-10-15T17:08:27Z&sv=2022-11-02&sr=b&sig=XCMlXZnWbDT8Y4yOGUc4bXhv6555pxzVxUwK6tomdeY%3D")
+#UI_CHAT_LOGO = os.getenv("UI_CHAT_LOGO", "/static/images/default_chat_logo.png")
+#UI_FAVICON = os.getenv("UI_FAVICON", "/static/images/default_favicon.ico")
+#UI_LOGO = os.getenv("UI_LOGO", "/static/images/default_logo.png")
+# Depuración
+print("UI_CHAT_LOGO:", UI_CHAT_LOGO)
+print("UI_FAVICON:", UI_FAVICON)
+print("UI_LOGO:", UI_LOGO)
+
 DOTENV_PATH = os.environ.get(
     "DOTENV_PATH",
     os.path.join(
@@ -32,13 +45,7 @@ DOTENV_PATH = os.environ.get(
     )
 )
 MINIMUM_SUPPORTED_AZURE_OPENAI_PREVIEW_API_VERSION = "2024-05-01-preview"
-# UI variables
-UI_CHAT_LOGO = os.getenv("UI_CHAT_LOGO","https://iastorageobs.blob.core.windows.net/logo/data4wellbeing_Logofull_H.png?sp=r&st=2024-10-14T10:59:41Z&se=2025-11-01T19:59:41Z&spr=https&sv=2022-11-02&sr=b&sig=2uzj7xNRcVr1QxlOFpr46GxJYl7gmmHNrZjNroIGiho%3D")
-UI_FAVICON = os.getenv("UI_FAVICON", "https://iastorageobs.blob.core.windows.net/logo/data4Wellbeing_logo.png?sp=r&st=2024-10-15T09:08:27Z&se=2025-10-15T17:08:27Z&sv=2022-11-02&sr=b&sig=XCMlXZnWbDT8Y4yOGUc4bXhv6555pxzVxUwK6tomdeY%3D")
-UI_LOGO = os.getenv("UI_LOGO", "https://iastorageobs.blob.core.windows.net/logo/data4Wellbeing_logo.png?sp=r&st=2024-10-15T09:08:27Z&se=2025-10-15T17:08:27Z&sv=2022-11-02&sr=b&sig=XCMlXZnWbDT8Y4yOGUc4bXhv6555pxzVxUwK6tomdeY%3D")
-#UI_CHAT_LOGO = os.getenv("UI_CHAT_LOGO", "/static/images/default_chat_logo.png")
-#UI_FAVICON = os.getenv("UI_FAVICON", "/static/images/default_favicon.ico")
-#UI_LOGO = os.getenv("UI_LOGO", "/static/images/default_logo.png")
+
 
 class _UiSettings(BaseSettings):
     model_config = SettingsConfigDict(
