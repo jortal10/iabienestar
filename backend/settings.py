@@ -58,7 +58,7 @@ class _UiSettings(BaseSettings):
     title: str = "IA del Bienestar"
     logo: Optional[str] = None
     chat_logo: Optional[str] = None
-    chat_title: str = "Comienza a chatear"
+    chat_title: str = "Comienza a chatearr"
     chat_description: str = "Esta IA está preparada para resolver tus dudas sobre conceptos relacionados con el Bienestar"
     favicon: str = "/favicon.ico"
     show_share_button: bool = True
