@@ -880,7 +880,7 @@ async def generate_title(conversation_messages) -> str:
     except Exception as e:
         logging.exception("Exception while generating title", e)
         return messages[-2]["content"]
-"""
+
 # CREAR API
 from flask import Flask, request, jsonify
 import openai
@@ -927,7 +927,7 @@ def api_chat():
     except Exception as e:
         # Maneja errores y devuélvelos al cliente
         return jsonify({'error': str(e)}), 500
-
+"""
 # Ejecuta la aplicación si es el archivo principal
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
