@@ -881,5 +881,49 @@ async def generate_title(conversation_messages) -> str:
         logging.exception("Exception while generating title", e)
         return messages[-2]["content"]
 
+# CREAR API
+from flask import Flask, request, jsonify
+import openai
+
+# Inicializa la aplicación Flask
+app = Flask(__name__)
+
+# Configura la clave API de OpenAI
+openai.api_key = "TU_API_KEY"
+
+# Define el endpoint de la API
+@app.route('/api/chat', methods=['POST'])
+def api_chat():
+    try:
+        # Obtén los datos JSON enviados por el cliente
+        data = request.get_json()
+        user_message = data.get('message', '')
+
+        if not user_message:
+            return jsonify({'error': 'No se proporcionó un mensaje'}), 400
+
+        # Llama a la API de OpenAI para obtener una respuesta
+        response = openai.ChatCompletion.create(
+            model="gpt-4o",  # Cambia el modelo si es necesario
+            messages=[
+                {"role": "system", "content": "Eres un asistente macarra."},
+                {"role": "user", "content": user_message},
+            ]
+        )
+
+        # Extrae la respuesta generada por OpenAI
+        chat_response = response['choices'][0]['message']['content']
+
+        # Devuelve la respuesta en formato JSON
+        return jsonify({'response': chat_response})
+
+    except Exception as e:
+        # Maneja errores y devuélvelos al cliente
+        return jsonify({'error': str(e)}), 500
+
+# Ejecuta la aplicación si es el archivo principal
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
+
 
 app = create_app()
