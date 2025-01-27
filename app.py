@@ -884,17 +884,24 @@ async def generate_title(conversation_messages) -> str:
 # CREAR API
 from flask import Flask, request, jsonify
 import openai
+import os
 
 # Inicializa la aplicación Flask
 app = Flask(__name__)
 
-# Configura la clave API de OpenAI
-openai.api_key = "TU_API_KEY"
+# Obtén el secret y la API key de las variables de entorno
+SECRET = os.getenv("AUTH_CLIENT_SECRET")  # Obtén el secret desde la variable de entorno
+openai.api_key = os.getenv("AZURE_OPENAI_KEY")  # Obtén la API key de OpenAI desde la variable de entorno
 
 # Define el endpoint de la API
 @app.route('/api/chat', methods=['POST'])
 def api_chat():
     try:
+        # Verifica el secret enviado en el encabezado
+        provided_secret = request.headers.get('X-Secret-Key')
+        if provided_secret != SECRET:
+            return jsonify({'error': 'No autorizado'}), 403
+
         # Obtén los datos JSON enviados por el cliente
         data = request.get_json()
         user_message = data.get('message', '')
@@ -906,7 +913,7 @@ def api_chat():
         response = openai.ChatCompletion.create(
             model="gpt-4o",  # Cambia el modelo si es necesario
             messages=[
-                {"role": "system", "content": "Eres un asistente macarra."},
+                {"role": "system", "content": "Eres un asistente que contesta con lenguaje macarra."},
                 {"role": "user", "content": user_message},
             ]
         )
