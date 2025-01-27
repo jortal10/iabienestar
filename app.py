@@ -927,10 +927,10 @@ def api_chat():
     except Exception as e:
         # Maneja errores y devuélvelos al cliente
         return jsonify({'error': str(e)}), 500
-"""
+
 # Ejecuta la aplicación si es el archivo principal
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
-"""
+
 
 app = create_app()
